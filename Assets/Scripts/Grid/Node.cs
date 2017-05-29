@@ -8,6 +8,11 @@ public class Node : MonoBehaviour
     {
         transform.position = new Vector3(position.x, position.y, -1);
     }
-    
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
+    }
+
     public class Factory : Factory<Vector2, Node> { }
 }
