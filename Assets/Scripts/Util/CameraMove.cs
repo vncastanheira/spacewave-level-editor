@@ -6,6 +6,8 @@ public class CameraMove : MonoBehaviour
 {
     [Range(0, 1)]
     public float speed;
+    public float horizontalLimit;
+    public float verticalLimit;
 
     float horizontal;
     float vertical;
@@ -18,6 +20,6 @@ public class CameraMove : MonoBehaviour
         
         var x = transform.position.x;
         var y = transform.position.y;
-        transform.position = new Vector3(Mathf.Clamp(x, -5, 5), Mathf.Clamp(y, -5, 5), -10);
+        transform.position = new Vector3(Mathf.Clamp(x, -horizontalLimit, horizontalLimit), Mathf.Clamp(y, -verticalLimit, verticalLimit), -10);
     }
 }

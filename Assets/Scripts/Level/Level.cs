@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 [System.Serializable]
-public class Level : ScriptableObject
+public class Level
 {
-#region Fields
+    #region Fields
     Vector2 gridDimension;
+    string name;
     #endregion
 
-#region Properties
-    /// <summary>
-    /// Set the grid matrix
-    /// </summary>
+    #region Properties
+    /// <summary> Set the grid matrix</summary>
     public Vector2 GridDimension
     {
         get
@@ -25,5 +23,22 @@ public class Level : ScriptableObject
             gridDimension = value;
         }
     }
-#endregion
+    public string Name { get { return name; } }
+    #endregion
+
+    public Level(int lines, int columns)
+    {
+        gridDimension = new Vector2(columns, lines);
+        name = "untitled";
+    }
+
+    #region Zenject
+
+    //Level creation factory
+    public class Factory : Factory<int, int, Level> { };
+
+    //Signals when a new Level is created
+    public class CreatedLevelSignal : Signal<CreatedLevelSignal> { }
+
+    #endregion
 }
