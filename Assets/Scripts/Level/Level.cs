@@ -8,7 +8,7 @@ public class Level
     #region Fields
     [SerializeField] Vector2 gridDimension;
     [SerializeField] string name;
-    [SerializeField] List<Enemy> Enemies;
+    [SerializeField] public List<Enemy> Enemies;
     #endregion
 
     #region Properties

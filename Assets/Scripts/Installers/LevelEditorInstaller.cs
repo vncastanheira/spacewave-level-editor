@@ -11,7 +11,7 @@ public class LevelEditorInstaller : MonoInstaller
         Container.Bind<LevelEditor>().AsSingle().NonLazy();
 
         Container.BindFactory<int, int, Level, Level.Factory>();
-        Container.BindFactory<int, EnemyClass, Enemy, Enemy.Factory>();
+        Container.BindFactory<int, EnemyClass, Vector2, Enemy, Enemy.Factory>();
         Container.BindFactory<Vector2, Node, Node.Factory>()
             .FromComponentInNewPrefab(GridNode);
 

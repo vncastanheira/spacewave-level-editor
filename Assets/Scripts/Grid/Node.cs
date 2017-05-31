@@ -12,6 +12,7 @@ public class Node : MonoBehaviour
     #region References and Injection
     [Inject] LevelEditor _editor;
     Enemy enemyRef;
+    [HideInInspector] public Vector2 Position { get { return transform.localPosition; } }
 
     public TextMesh Label;
     #endregion

@@ -31,7 +31,11 @@ public sealed class LevelEditor
     public void Open() { }
 
     // Saves the level currently being edited
-    public void Save() { }
+    public void Save()
+    {
+        var levelJson = JsonUtility.ToJson(_currentLevel);
+        System.IO.File.WriteAllText(settings.LevelFolderLocation + "untitled." + settings.LevelExtensionName, levelJson);
+    }
 
     #endregion
 
@@ -53,7 +57,8 @@ public sealed class LevelEditor
     public void CreateEnemy(int level, int classIndex)
     {
         var @class = (EnemyClass)Enum.GetValues(typeof(EnemyClass)).GetValue(classIndex);
-        var enemy = _enemyFactory.Create(level, @class);
+        var enemy = _enemyFactory.Create(level, @class, _currentNode.Position);
+        _currentLevel.Enemies.Add(enemy);
         _currentNode.SetEnemy(enemy);
     }
     

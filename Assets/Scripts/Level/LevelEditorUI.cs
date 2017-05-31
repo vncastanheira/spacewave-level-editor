@@ -24,12 +24,16 @@ public class LevelEditorUI : IInitializable
     [Inject(Id = "enemy-class")] Dropdown enemyClassDropdown;
     #endregion
 
+    [Inject(Id = "level-save")] Button saveLevelButton;
+
     public void Initialize()
     {
         createLevelButton.onClick.AddListener(() =>
         {
             editor.New((int)linesSlider.value, (int)columnsSlider.value);
         });
+
+        saveLevelButton.onClick.AddListener(editor.Save);
 
         enemyCreateButton.onClick.AddListener(() =>
         {
