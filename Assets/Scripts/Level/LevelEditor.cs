@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -37,11 +38,24 @@ public sealed class LevelEditor
     #region Level Editing
 
     Node _currentNode;
+    [Inject] Enemy.Factory _enemyFactory;
 
     public void SetNode(Node node)
     {
         _currentNode = node;
     }
 
+    public void ResetNode()
+    {
+        _currentNode.ResetEnemy();
+    }
+
+    public void CreateEnemy(int level, int classIndex)
+    {
+        var @class = (EnemyClass)Enum.GetValues(typeof(EnemyClass)).GetValue(classIndex);
+        var enemy = _enemyFactory.Create(level, @class);
+        _currentNode.SetEnemy(enemy);
+    }
+    
     #endregion
 }

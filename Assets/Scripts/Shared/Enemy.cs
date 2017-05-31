@@ -1,8 +1,19 @@
+using Zenject;
+
 [System.Serializable]
 public class Enemy {
-    public int Health { get; set; }
-    public int Barrier { get; set; }
-    public EnemyClass Class { get; set; } 
+    public int Level { get; set; }
+    public EnemyClass Class { get; set; }
+    
+    public Enemy(int level, EnemyClass @class)
+    {
+        Level = level;
+        Class = @class;
+    }
+
+    public class Factory : Factory<int, EnemyClass, Enemy> { }
+
+    //public class CreateEnemySignal : Signal<Enemy, CreateEnemySignal> { }
 }
 
 public enum EnemyClass

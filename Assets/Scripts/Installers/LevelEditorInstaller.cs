@@ -9,9 +9,12 @@ public class LevelEditorInstaller : MonoInstaller
     public override void InstallBindings()
     {
         Container.Bind<LevelEditor>().AsSingle().NonLazy();
+
         Container.BindFactory<int, int, Level, Level.Factory>();
+        Container.BindFactory<int, EnemyClass, Enemy, Enemy.Factory>();
         Container.BindFactory<Vector2, Node, Node.Factory>()
             .FromComponentInNewPrefab(GridNode);
+
         Container.Bind<IInitializable>()
             .To<LevelEditorUI>().AsSingle().NonLazy();
 
@@ -21,6 +24,8 @@ public class LevelEditorInstaller : MonoInstaller
             .To<LevelInfo>(l => l.SetInfo).FromComponentInHierarchy();
         Container.BindSignal<Level.CreatedLevelSignal>()
             .To<GridDisplay>(d => d.Create).FromComponentInHierarchy();
+        Container.BindSignal<Level.CreatedLevelSignal>()
+            .To<LevelEditorUI>(e => e.Reset).AsSingle();
 
         Container.DeclareSignal<Node.SelectNodeSignal>();
         Container.BindSignal<Node, Node.SelectNodeSignal>()
@@ -29,5 +34,9 @@ public class LevelEditorInstaller : MonoInstaller
             .To<LevelEditorUI>(e => e.SetNode).AsSingle();
         Container.BindSignal<Node, Node.SelectNodeSignal>()
             .To<Node>(n => n.MarkAsUnselected).FromComponentInHierarchy();
+
+        Container.DeclareSignal<Node.ResetNodeSignal>();
+        Container.BindSignal<Node.ResetNodeSignal>()
+            .To<LevelEditor>(e => e.ResetNode).AsSingle();
     }
 }
