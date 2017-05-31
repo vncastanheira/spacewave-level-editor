@@ -18,6 +18,10 @@ public class LevelEditorUI : IInitializable
     [Inject(Id = "dialog_open")] Dialog dialogOpen;
     #endregion
 
+    #region Menu
+    [Inject(Id = "menu-create")] Button enemyCreateButton;
+    #endregion
+
     public void Initialize()
     {
         Debug.Assert(editor != null, "editor was not injected");
@@ -28,4 +32,9 @@ public class LevelEditorUI : IInitializable
         });
     }
     
+
+    public void SetNode(Node node)
+    {
+        enemyCreateButton.interactable = node != null;
+    }
 }

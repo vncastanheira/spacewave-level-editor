@@ -18,6 +18,6 @@ public class CameraMove : MonoBehaviour
         
         var x = transform.position.x;
         var y = transform.position.y;
-        transform.position = new Vector3(Mathf.Clamp(x, -horizontalLimit, horizontalLimit), Mathf.Clamp(y, -verticalLimit, verticalLimit), -10);
+        transform.position = new Vector3(Mathf.Clamp(x, -horizontalLimit, horizontalLimit), Mathf.Clamp(y, -verticalLimit, verticalLimit), -1);
     }
 }

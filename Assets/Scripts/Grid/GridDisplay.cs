@@ -27,6 +27,6 @@ public class GridDisplay : MonoBehaviour {
             }
         }
 
-        transform.position = new Vector3(-(editor.CurrentLevel.GridDimension.x / 2), -(editor.CurrentLevel.GridDimension.y / 2), -10);
+        transform.position = new Vector3(-(editor.CurrentLevel.GridDimension.x / 2), -(editor.CurrentLevel.GridDimension.y / 2), 0);
     }
 }

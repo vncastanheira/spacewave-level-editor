@@ -17,10 +17,17 @@ public class LevelEditorInstaller : MonoInstaller
 
         Container.DeclareSignal<Level.CreatedLevelSignal>()
             .When((i) => i.ObjectInstance != null);
-
         Container.BindSignal<Level.CreatedLevelSignal>()
             .To<LevelInfo>(l => l.SetInfo).FromComponentInHierarchy();
         Container.BindSignal<Level.CreatedLevelSignal>()
             .To<GridDisplay>(d => d.Create).FromComponentInHierarchy();
+
+        Container.DeclareSignal<Node.SelectNodeSignal>();
+        Container.BindSignal<Node, Node.SelectNodeSignal>()
+            .To<LevelEditor>(e => e.SetNode).AsSingle();
+        Container.BindSignal<Node, Node.SelectNodeSignal>()
+            .To<LevelEditorUI>(e => e.SetNode).AsSingle();
+        Container.BindSignal<Node, Node.SelectNodeSignal>()
+            .To<Node>(n => n.MarkAsUnselected).FromComponentInHierarchy();
     }
 }

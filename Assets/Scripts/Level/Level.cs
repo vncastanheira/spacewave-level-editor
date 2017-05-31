@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -5,8 +6,9 @@ using Zenject;
 public class Level
 {
     #region Fields
-    Vector2 gridDimension;
-    string name;
+    [SerializeField] Vector2 gridDimension;
+    [SerializeField] string name;
+    [SerializeField] List<Enemy> Enemies;
     #endregion
 
     #region Properties
@@ -30,6 +32,7 @@ public class Level
     {
         gridDimension = new Vector2(columns, lines);
         name = "untitled";
+        Enemies = new List<Enemy>();
     }
 
     #region Zenject

@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class SliderToText : MonoBehaviour
 {
+    public string Prefix;
     Text textUI;
 
     private void Awake()
@@ -13,6 +14,6 @@ public class SliderToText : MonoBehaviour
 
     public void SetText(float value)
     {
-        textUI.text = value.ToString();
+        textUI.text = Prefix + value.ToString();
     }
 }
