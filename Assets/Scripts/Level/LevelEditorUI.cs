@@ -6,7 +6,7 @@ public class LevelEditorUI : IInitializable
 {
     [Inject]
     LevelEditor editor;
-    
+
     #region Dialogs
     [Inject(Id = "dialog_new")] Dialog dialogNew;
     [Inject(Id = "lines")] Slider linesSlider;
@@ -15,6 +15,9 @@ public class LevelEditorUI : IInitializable
 
     [Inject(Id = "dialog_open")] Dialog dialogOpen;
     [Inject(Id = "open_level-btn")] Button openLevelButton;
+
+    [Inject(Id = "dialog_warning")] Dialog dialogWarning;
+    [Inject(Id = "dialog_warning-message")] Text dialogWarningMessage;
     #endregion
 
     #region Menu
@@ -24,16 +27,16 @@ public class LevelEditorUI : IInitializable
     [Inject(Id = "enemy-class")] Dropdown enemyClassDropdown;
     #endregion
 
+    #region Options
     [Inject(Id = "level-save")] Button saveLevelButton;
+    [Inject(Id = "leveltitle")] InputField levelTitleInput;
+    #endregion
 
     public void Initialize()
     {
-        createLevelButton.onClick.AddListener(() =>
-        {
-            editor.New((int)linesSlider.value, (int)columnsSlider.value);
-        });
-
+        createLevelButton.onClick.AddListener(() => { editor.New((int)linesSlider.value, (int)columnsSlider.value); });
         saveLevelButton.onClick.AddListener(editor.Save);
+        levelTitleInput.onEndEdit.AddListener(editor.SetTitle);
 
         enemyCreateButton.onClick.AddListener(() =>
         {
@@ -45,17 +48,27 @@ public class LevelEditorUI : IInitializable
             editor.ResetNode();
         });
     }
-    
+
     public void SetNode(Node node)
     {
         enemyCreateButton.interactable = node != null;
         enemyResetButton.interactable = node != null;
     }
 
-
     public void Reset()
     {
         enemyCreateButton.interactable = false;
         enemyResetButton.interactable = false;
+    }
+
+    public void RejectLevelTitle(string title)
+    {
+        levelTitleInput.text = title;
+    }
+
+    public void ShowWarning(string message)
+    {
+        dialogWarning.Show();
+        dialogWarningMessage.text = message;
     }
 }

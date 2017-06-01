@@ -25,7 +25,11 @@ public class Level
             gridDimension = value;
         }
     }
-    public string Name { get { return name; } }
+    public string Name
+    {
+        get { return name; }
+        set { name = value; }
+    }
     #endregion
 
     public Level(int lines, int columns)
@@ -42,6 +46,9 @@ public class Level
 
     //Signals when a new Level is created
     public class CreatedLevelSignal : Signal<CreatedLevelSignal> { }
+
+    // Rejects the given title (because it's empty) and send the current saved title
+    public class RejectTitleSignal : Signal<string, RejectTitleSignal> { }
 
     #endregion
 }
