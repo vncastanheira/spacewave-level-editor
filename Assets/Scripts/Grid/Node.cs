@@ -17,6 +17,8 @@ public class Node : MonoBehaviour
     public TextMesh Label;
     #endregion
 
+    public Enemy Enemy { get { return enemyRef; } }
+
     [Inject]
     public void Constructor(Vector2 position)
     {
@@ -50,7 +52,7 @@ public class Node : MonoBehaviour
     }
 
     public void ResetEnemy()
-    {
+    { 
         enemyRef = null;
         Label.text = string.Empty;
     }

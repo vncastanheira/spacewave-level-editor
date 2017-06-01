@@ -51,6 +51,7 @@ public sealed class LevelEditor
 
     public void ResetNode()
     {
+        _currentLevel.Enemies.Remove(_currentNode.Enemy);
         _currentNode.ResetEnemy();
     }
 
